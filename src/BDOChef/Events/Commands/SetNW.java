@@ -6,7 +6,6 @@ import BDOChef.Tables.NWEventTable;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 
 public class SetNW extends AbstractCommand {
 

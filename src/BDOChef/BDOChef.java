@@ -1,5 +1,6 @@
 package BDOChef;
 
+import BDOChef.Events.Commands.Members;
 import BDOChef.Events.CommandsEvent;
 import BDOChef.Events.LeaveGuild;
 import BDOChef.Events.TermsAndConditions;
@@ -10,14 +11,10 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.*;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
-import java.net.URL;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import java.lang.reflect.Constructor;
 
 public class BDOChef {
     public static JDA jda;
