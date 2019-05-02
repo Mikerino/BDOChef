@@ -1,2 +1,6 @@
 /.idea
-Data
+# exclude everything
+Data/*
+
+# exception to the rule
+!Data/.gitkeep 

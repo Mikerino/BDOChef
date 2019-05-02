@@ -5,8 +5,8 @@ import io.jsondb.annotation.Id;
 
 @Document(collection = "Settings", schemaVersion= "1.0")
 public class Setting {
+
     @Id
-    private String Id;
     private String key;
     private String value;
 
@@ -26,11 +26,4 @@ public class Setting {
         this.value = value;
     }
 
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String id) {
-        Id = id;
-    }
 }

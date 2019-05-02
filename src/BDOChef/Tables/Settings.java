@@ -16,58 +16,32 @@ public class Settings {
     }
 
     public String getSetting(String key) {
-        Setting setting  = (Setting) settings.get(key);
-        if (setting == null) {
+        if(!settings.containsKey(key)) {
             return null;
         }
-        return setting.toString();
+        return (String) settings.get(key);
     }
 
     private void loadSettings() {
         settings = new HashMap();
         List<Setting> lSettings =  BDOChef.jdbTemptale.findAll(Setting.class);
         for (Setting setting : lSettings) {
-            settings.put(setting.getValue(), setting.getKey());
+            settings.put(setting.getKey(), setting.getValue());
         }
     }
 
     public void setSetting(String key, String value) {
-        if (settingExists(key)) {
-            Setting setting = getSavedSetting(key);
-            setting.setValue(value);
-            BDOChef.jdbTemptale.save(setting, Setting.class);
-        } else {
-            Setting setting = new Setting();
-            setting.setId(Integer.toString(getNextId()));
+
+        Setting setting = BDOChef.jdbTemptale.findById(key, Setting.class);
+        if (setting == null) {
+            setting = new Setting();
             setting.setKey(key);
             setting.setValue(value);
+            BDOChef.jdbTemptale.insert(setting);
+        } else {
+            setting.setValue(value);
+            BDOChef.jdbTemptale.save(setting, Setting.class);
         }
         loadSettings();
-    }
-
-    private boolean settingExists(String key) {
-        String jxQuery = String.format("/.[key='%s']", key);
-        List<Setting> settings = BDOChef.jdbTemptale.find(jxQuery, Setting.class);
-        if (settings.size() != 0) {
-            return true;
-        }
-        return false;
-    }
-
-    private int getNextId() {
-        List<Setting> lSetting = BDOChef.jdbTemptale.findAll(Setting.class);
-        if (lSetting.size() == 0) {
-            return 1;
-        }
-        Setting lastSetting = lSetting.get(lSetting.size()-1);
-        return Integer.parseInt(lastSetting.getId())+1;
-    }
-
-    private Setting getSavedSetting(String key) {
-        String jxQuery = String.format("/.[key='%s']", key);
-        List<Setting> lSetting = BDOChef.jdbTemptale.find(jxQuery, Setting.class);
-        if (lSetting.size() > 0)
-            return lSetting.get(0);
-        return null;
     }
 }
