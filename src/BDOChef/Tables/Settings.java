@@ -15,12 +15,12 @@ public class Settings {
         loadSettings();
     }
 
-    public String getSetting(String key) throws Exception {
-        String value  = settings.get(key).toString();
-        if (value == null) {
-            throw new Exception("Key doesnt exists.");
+    public String getSetting(String key) {
+        Setting setting  = (Setting) settings.get(key);
+        if (setting == null) {
+            return null;
         }
-        return value;
+        return setting.toString();
     }
 
     private void loadSettings() {

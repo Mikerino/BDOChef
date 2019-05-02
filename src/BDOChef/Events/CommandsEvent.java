@@ -35,9 +35,9 @@ public class CommandsEvent extends AbstractEvent {
 
     }
 
-    public void sendCommandHelp(GuildMessageReceivedEvent event) {
+    private void sendCommandHelp(GuildMessageReceivedEvent event) {
         Map<String, Class> list = getCommandList();
-        List<String> commands = new ArrayList<String>();
+        List<String> commands = new ArrayList<>();
         list.forEach((k,v) -> commands.add(k));
 
         EmbedBuilder builder = new EmbedBuilder();
@@ -49,7 +49,7 @@ public class CommandsEvent extends AbstractEvent {
 
     private Map<String, Class> getCommandList() {
         if (commandList == null) {
-            commandList = new HashMap<String, Class>();
+            commandList = new HashMap<>();
             commandList.put(SetGameCharacter.command, SetGameCharacter.class);
             commandList.put(RemoveGameCharacter.command, Members.class);
             commandList.put(Members.command, Members.class);

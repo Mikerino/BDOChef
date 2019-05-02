@@ -15,6 +15,7 @@ import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 
 import java.lang.reflect.Constructor;
+import java.util.Scanner;
 
 public class BDOChef {
     public static JDA jda;
@@ -25,12 +26,22 @@ public class BDOChef {
     public static void main(String[] args) throws Exception {
         jdbTemptale = DB.initDB();
         settings = new Settings();
-        jda = new JDABuilder(AccountType.BOT).setToken("NTY0NTA0OTQyOTM3ODk5MDE4.XKskjQ.evfp3YELrDzbz2PfjW_yDoUQd8o").buildBlocking();
+        String token = settings.getSetting("token");
+        System.out.println(token);
+        if (token == null) {
+            System.out.println("Insert token");
+            Scanner inputToken = new Scanner(System.in);
+            token = inputToken.nextLine();
+            settings.setSetting("token", token);
+
+        }
+        System.out.println(token);
+        /*jda = new JDABuilder(AccountType.BOT).setToken("NTY0NTA0OTQyOTM3ODk5MDE4.XKskjQ.evfp3YELrDzbz2PfjW_yDoUQd8o").buildBlocking();
         jda.getPresence().setStatus(OnlineStatus.IDLE);
         jda.getPresence().setGame(Game.playing("BDOChef"));
 
         jda.addEventListener(new CommandsEvent());
         jda.addEventListener(new TermsAndConditions());
-        jda.addEventListener(new LeaveGuild());
+        jda.addEventListener(new LeaveGuild());*/
     }
 }
